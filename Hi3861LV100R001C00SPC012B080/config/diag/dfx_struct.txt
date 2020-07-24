@@ -1,0 +1,626 @@
+
+#define __HI_TYPES_H__
+#define HI_START_HEADER
+#define HI_END_HEADER
+#include "hso_hdb_common.h"
+#include "hi_mdm_types.h"
+#include "hi_config.h"
+
+#include "dfx_sys.h"
+
+// Define the struct C_fd_fsm
+struct C_fd_fsm
+{
+    hi_u32 fec_para_fsm_curr : 3;
+    hi_u32 rsvd0 : 1;
+    hi_u32 par_curr_stat : 3;
+    hi_u32 rsvd1 : 1;
+    hi_u32 maxh_curr_stat : 3;
+    hi_u32 rsvd2 : 1;
+    hi_u32 symbol_align_state : 4;
+    hi_u32 snr_fsm_curr : 2;
+    hi_u32 rsvd4 : 2;
+    hi_u32 nbictrl_fsm_curr : 3;
+    hi_u32 rsvd5 : 1;
+    hi_u32 rotate_curr_state : 3;
+    hi_u32 rsvd6 : 1;
+    hi_u32 demap_fsm_curr : 3;
+    hi_u32 rsvd7 : 1;
+};
+
+// Define the struct C_phy_other_fsm
+struct C_phy_other_fsm
+{
+    hi_u32 defc_filter_fsm_curr : 4;
+    hi_u32 cs_fsm_curr : 3;
+    hi_u32 rsvd1 : 1;
+    hi_u32 fec_fsm_curr : 4;
+    hi_u32 mac2phy_fsm_curr : 3;
+    hi_u32 rsvd3 : 1;
+    hi_u32 phy_tx_state : 2;
+    hi_u32 rsvd4 : 2;
+    hi_u32 phy_rx_state : 2;
+    hi_u32 rsvd5 : 2;
+    hi_u32 rep_curr_state : 3;
+    hi_u32 rsvd6 : 1;
+    hi_u32 pos_curr_state : 2;
+    hi_u32 rsvd7 : 2;
+};
+
+// Define the struct C_phy_ctrl_fsm
+struct C_phy_ctrl_fsm
+{
+    hi_u32 phyctrl_fsm_curr : 5;
+    hi_u32 rsvd0 : 3;
+    hi_u32 defc_fsm_curr : 5;
+    hi_u32 rsvd1 : 3;
+    hi_u32 tx_state_debug : 3;
+    hi_u32 rsvd2 : 13;
+};
+
+// Define the struct C_freq_scan_dfx1
+struct C_freq_scan_dfx1
+{
+    hi_u32 freq_scan_succ1_cnt : 16;
+    hi_u32 freq_scan_succ2_cnt : 16;
+};
+
+// Define the struct C_freq_scan_dfx2
+struct C_freq_scan_dfx2
+{
+    hi_u32 freq_scan_succ3_cnt : 16;
+    hi_u32 freq_scan_succ4_cnt : 16;
+};
+
+// Define the struct C_dt_rcv1
+struct C_dt_rcv1
+{
+    hi_u32 dt0_rx_cnt : 16;
+    hi_u32 dt1_rx_cnt : 16;
+};
+
+// Define the struct C_dt_rcv2
+struct C_dt_rcv2
+{
+    hi_u32 dt2_rx_cnt : 16;
+    hi_u32 dt3_rx_cnt : 16;
+};
+
+// Define the struct C_dt_rcv3
+struct C_dt_rcv3
+{
+    hi_u32 dt4_rx_cnt : 16;
+    hi_u32 dt5_rx_cnt : 16;
+};
+
+// Define the struct C_dt_rcv4
+struct C_dt_rcv4
+{
+    hi_u32 dt6_rx_cnt : 16;
+    hi_u32 dt7_rx_cnt : 16;
+};
+
+// Define the struct C_tx_times
+struct C_tx_times
+{
+    hi_u32 tx_start_cnt : 16;
+    hi_u32 tx_finish_cnt : 16;
+};
+
+// Define the struct C_drop_cnt
+struct C_drop_cnt
+{
+    hi_u32 drop_all_cnt : 16;
+    hi_u32 drop_pl_cnt : 16;
+};
+
+// Define the struct C_freq_others
+struct C_freq_others
+{
+    hi_u32 no_pl_cnt : 16;
+    hi_u32 freq_scan_cnt : 16;
+};
+
+// Define the struct C_cs_dfx1
+struct C_cs_dfx1
+{
+    hi_u32 fc_start_cnt : 16;
+    hi_u32 fc_start_imp_cnt : 16;
+};
+
+// Define the struct C_cs_dfx2
+struct C_cs_dfx2
+{
+    hi_u32 fc_start_cubic_cnt : 16;
+    hi_u32 fc_start_aagc_cnt : 16;
+};
+
+// Define the struct C_cs_dfx3
+struct C_cs_dfx3
+{
+    hi_u32 rsvd : 16;
+    hi_u32 st4_cnt : 16;
+};
+
+// Define the struct C_cs_dfx4
+struct C_cs_dfx4
+{
+    hi_u32 cs_low_snr_cnt : 16;
+    hi_u32 cs_high_snr_cnt : 16;
+};
+
+// Define the struct C_cs_dfx5
+struct C_cs_dfx5
+{
+    hi_u32 cs_snr_cnt : 16;
+    hi_u32 agc_qk_vld_cnt : 16;
+};
+
+// Define the struct C_para_det_dfx
+struct C_para_det_dfx
+{
+    hi_u32 para_det_fail_cnt : 16;
+    hi_u32 rsvd : 16;
+};
+
+// Define the struct C_frame_end_dfx
+struct C_frame_end_dfx
+{
+    hi_u32 rsvd : 16;
+    hi_u32 frame_end_cnt : 16;
+};
+
+// Define the struct C_nbi_dfx1
+struct C_nbi_dfx1
+{
+    hi_u32 nbi_frame_end_cnt : 16;
+    hi_u32 nbi_st3_end_cnt : 16;
+};
+
+// Define the struct C_nbi_dfx2
+struct C_nbi_dfx2
+{
+    hi_u32 nbi_st3to0_cnt : 16;
+    hi_u32 nbi_ontime_cnt : 16;
+};
+
+// Define the struct C_nbi_dfx3
+struct C_nbi_dfx3
+{
+    hi_u32 rsvd1 : 8;
+    hi_u32 halt_rx_cnt : 8;
+    hi_u32 rsvd2 : 16;
+};
+
+// Define the struct C_agc_dfx
+struct C_agc_dfx
+{
+    hi_u32 dagc_adj_time_thres : 8;
+    hi_u32 aagc_adj_time_thres : 8;
+    hi_u32 dagc_adj_too_less_cnt : 8;
+    hi_u32 aagc_adj_too_less_cnt : 8;
+};
+
+// Define the struct C_pl_freq_dfx1
+struct C_pl_freq_dfx1
+{
+    hi_u32 pl_freq_from_lut_cnt : 16;
+    hi_u32 pl_freq_from_fc_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx2
+struct C_pl_freq_dfx2
+{
+    hi_u32 pl_freq_cflt_cnt : 8;
+    hi_u32 rsvd : 8;
+    hi_u32 pl_freq_lut_nohit_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx3
+struct C_pl_freq_dfx3
+{
+    hi_u32 pl_freq_succ : 16;
+    hi_u32 pl_freq_fail : 16;
+};
+
+// Define the struct C_pl_freq_dfx4
+struct C_pl_freq_dfx4
+{
+    hi_u32 pl_freq_item0_cnt : 16;
+    hi_u32 pl_freq_item1_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx5
+struct C_pl_freq_dfx5
+{
+    hi_u32 pl_freq_item2_cnt : 16;
+    hi_u32 pl_freq_item3_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx6
+struct C_pl_freq_dfx6
+{
+    hi_u32 pl_freq_item4_cnt : 16;
+    hi_u32 pl_freq_item5_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx7
+struct C_pl_freq_dfx7
+{
+    hi_u32 pl_freq_item6_cnt : 16;
+    hi_u32 pl_freq_item7_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx8
+struct C_pl_freq_dfx8
+{
+    hi_u32 pl_freq_item8_cnt : 16;
+    hi_u32 pl_freq_item9_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx9
+struct C_pl_freq_dfx9
+{
+    hi_u32 pl_freq_item10_cnt : 16;
+    hi_u32 pl_freq_item11_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx10
+struct C_pl_freq_dfx10
+{
+    hi_u32 pl_freq_item12_cnt : 16;
+    hi_u32 pl_freq_item13_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx11
+struct C_pl_freq_dfx11
+{
+    hi_u32 pl_freq_item14_cnt : 16;
+    hi_u32 pl_freq_item15_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx12
+struct C_pl_freq_dfx12
+{
+    hi_u32 pl_freq_item16_cnt : 16;
+    hi_u32 pl_freq_item17_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx13
+struct C_pl_freq_dfx13
+{
+    hi_u32 pl_freq_item18_cnt : 16;
+    hi_u32 pl_freq_item19_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx14
+struct C_pl_freq_dfx14
+{
+    hi_u32 pl_freq_item20_cnt : 16;
+    hi_u32 pl_freq_item21_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx15
+struct C_pl_freq_dfx15
+{
+    hi_u32 pl_freq_item22_cnt : 16;
+    hi_u32 pl_freq_item23_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx16
+struct C_pl_freq_dfx16
+{
+    hi_u32 pl_freq_item24_cnt : 16;
+    hi_u32 pl_freq_item25_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx17
+struct C_pl_freq_dfx17
+{
+    hi_u32 pl_freq_item26_cnt : 16;
+    hi_u32 pl_freq_item27_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx18
+struct C_pl_freq_dfx18
+{
+    hi_u32 pl_freq_item28_cnt : 16;
+    hi_u32 pl_freq_item29_cnt : 16;
+};
+
+// Define the struct C_pl_freq_dfx19
+struct C_pl_freq_dfx19
+{
+    hi_u32 pl_freq_item30_cnt : 16;
+    hi_u32 pl_freq_item31_cnt : 16;
+};
+
+// Define the struct C_tx_dfx1
+struct C_tx_dfx1
+{
+    hi_u32 tx_fc_cnt : 16;
+    hi_u32 tx_preamble_cnt : 16;
+};
+
+// Define the struct C_tx_dfx2
+struct C_tx_dfx2
+{
+    hi_u32 tx_isp_sig_cnt : 16;
+    hi_u32 tx_pb_cnt : 16;
+};
+
+// Define the struct C_tx_dfx3
+struct C_tx_dfx3
+{
+    hi_u32 isp_tx_cnt : 16;
+    hi_u32 rsvd : 16;
+};
+
+// Define the struct C_tx_dfx6
+struct C_tx_dfx6
+{
+    hi_u32 dt0_tx_cnt : 16;
+    hi_u32 dt1_tx_cnt : 16;
+};
+
+// Define the struct C_tx_dfx7
+struct C_tx_dfx7
+{
+    hi_u32 dt2_tx_cnt : 16;
+    hi_u32 dt3_tx_cnt : 16;
+};
+
+// Define the struct C_tx_dfx8
+struct C_tx_dfx8
+{
+    hi_u32 dt4_tx_cnt : 16;
+    hi_u32 dt5_tx_cnt : 16;
+};
+
+// Define the struct C_tx_dfx9
+struct C_tx_dfx9
+{
+    hi_u32 dt6_tx_cnt : 16;
+    hi_u32 dt7_tx_cnt : 16;
+};
+
+// Define the struct C_tx_dfx10
+struct C_tx_dfx10
+{
+    hi_u32 preamble_only_cnt : 8;
+    hi_u32 ppdu_start_while_fc_tx : 8;
+    hi_u32 ppdu_start_while_pb_tx : 8;
+    hi_u32 rsvd : 8;
+};
+
+// Define the struct C_tx_tmi_dfx0
+struct C_tx_tmi_dfx0
+{
+    hi_u32 tx_tmi0_cnt : 16;
+    hi_u32 tx_tmi1_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx1
+struct C_tx_tmi_dfx1
+{
+    hi_u32 tx_tmi2_cnt : 16;
+    hi_u32 tx_tmi3_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx2
+struct C_tx_tmi_dfx2
+{
+    hi_u32 tx_tmi4_cnt : 16;
+    hi_u32 tx_tmi5_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx3
+struct C_tx_tmi_dfx3
+{
+    hi_u32 tx_tmi6_cnt : 16;
+    hi_u32 tx_tmi7_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx4
+struct C_tx_tmi_dfx4
+{
+    hi_u32 tx_tmi8_cnt : 16;
+    hi_u32 tx_tmi9_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx5
+struct C_tx_tmi_dfx5
+{
+    hi_u32 tx_tmi10_cnt : 16;
+    hi_u32 tx_tmi11_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx6
+struct C_tx_tmi_dfx6
+{
+    hi_u32 tx_tmi12_cnt : 16;
+    hi_u32 tx_tmi13_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx7
+struct C_tx_tmi_dfx7
+{
+    hi_u32 tx_tmi14_cnt : 16;
+    hi_u32 Reserved_0 : 16;
+};
+
+// Define the struct C_tx_tmi_dfx8
+struct C_tx_tmi_dfx8
+{
+    hi_u32 tx_extmi0_cnt : 16;
+    hi_u32 tx_extmi1_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx9
+struct C_tx_tmi_dfx9
+{
+    hi_u32 tx_extmi2_cnt : 16;
+    hi_u32 tx_extmi3_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx10
+struct C_tx_tmi_dfx10
+{
+    hi_u32 tx_extmi4_cnt : 16;
+    hi_u32 tx_extmi5_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx11
+struct C_tx_tmi_dfx11
+{
+    hi_u32 tx_extmi6_cnt : 16;
+    hi_u32 tx_extmi7_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx12
+struct C_tx_tmi_dfx12
+{
+    hi_u32 tx_extmi8_cnt : 16;
+    hi_u32 tx_extmi9_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx13
+struct C_tx_tmi_dfx13
+{
+    hi_u32 tx_extmi10_cnt : 16;
+    hi_u32 tx_extmi11_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx14
+struct C_tx_tmi_dfx14
+{
+    hi_u32 tx_extmi12_cnt : 16;
+    hi_u32 tx_extmi13_cnt : 16;
+};
+
+// Define the struct C_tx_tmi_dfx15
+struct C_tx_tmi_dfx15
+{
+    hi_u32 tx_extmi14_cnt : 16;
+    hi_u32 tx_extmi15_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx0
+struct C_tx_freq_dfx0
+{
+    hi_u32 freq1_tx_cnt : 16;
+    hi_u32 freq2_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx1
+struct C_tx_freq_dfx1
+{
+    hi_u32 freq3_tx_cnt : 16;
+    hi_u32 freq4_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx2
+struct C_tx_freq_dfx2
+{
+    hi_u32 freq5_tx_cnt : 16;
+    hi_u32 freq6_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx3
+struct C_tx_freq_dfx3
+{
+    hi_u32 freq7_tx_cnt : 16;
+    hi_u32 freq8_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx4
+struct C_tx_freq_dfx4
+{
+    hi_u32 freq9_tx_cnt : 16;
+    hi_u32 freq10_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx5
+struct C_tx_freq_dfx5
+{
+    hi_u32 freq11_tx_cnt : 16;
+    hi_u32 freq12_tx_cnt : 16;
+};
+
+// Define the struct C_tx_freq_dfx6
+struct C_tx_freq_dfx6
+{
+    hi_u32 freq13_tx_cnt : 16;
+    hi_u32 rx_buffer_cflt_cnt : 8;
+    hi_u32 freq_rlt_timeout_cnt : 8;
+};
+
+// Define the struct C_rx_freq_dfx0
+struct C_rx_freq_dfx0
+{
+    hi_u32 freq1_rx_cnt : 16;
+    hi_u32 freq2_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx1
+struct C_rx_freq_dfx1
+{
+    hi_u32 freq3_rx_cnt : 16;
+    hi_u32 freq4_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx2
+struct C_rx_freq_dfx2
+{
+    hi_u32 freq5_rx_cnt : 16;
+    hi_u32 freq6_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx3
+struct C_rx_freq_dfx3
+{
+    hi_u32 freq7_rx_cnt : 16;
+    hi_u32 freq8_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx4
+struct C_rx_freq_dfx4
+{
+    hi_u32 freq9_rx_cnt : 16;
+    hi_u32 freq10_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx5
+struct C_rx_freq_dfx5
+{
+    hi_u32 freq11_rx_cnt : 16;
+    hi_u32 freq12_rx_cnt : 16;
+};
+
+// Define the struct C_rx_freq_dfx6
+struct C_rx_freq_dfx6
+{
+    hi_u32 freq13_rx_cnt : 16;
+    hi_u32 maxh_pos_cnt : 16;
+};
+
+// Define the struct C_cs_snr_rise
+struct C_cs_snr_rise
+{
+	hi_u32 cs2_snr_r_cnt : 16;
+	hi_u32 cs3_snr_r_cnt : 16;
+};
+
+// Define the struct C_cs_snr_fall0
+struct C_cs_snr_fall0
+{
+	hi_u32 cs1_snr_f_cnt : 16;
+	hi_u32 cs2_snr_f_cnt : 16;
+};
+
+// Define the struct C_cs_snr_fall1
+struct C_cs_snr_fall1
+{
+	hi_u32 cs3_snr_f_cnt : 16;
+	hi_u32 Reserved_0 : 16;
+};

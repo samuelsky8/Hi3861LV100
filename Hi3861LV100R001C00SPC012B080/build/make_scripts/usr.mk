@@ -1,0 +1,17 @@
+COMPILE_MODULE :=
+USR_APP_ON ?= n
+Q := @
+TOOLS_PREFIX := riscv32-unknown-elf-
+GCC_VER_NUM := 7.3.0
+USR_OUTPUT_DIR ?=
+USR_LIBS ?=
+LIBS :=
+LIBPATH :=
+LOG_PATH := build/build_tmp/logs
+OBJ_PATH := build/build_tmp/objs
+LIB_PATH := build/build_tmp/libs
+CACHE_PATH := build/build_tmp/cache
+LINK_PATH := build/build_tmp/scripts
+NV_PATH := build/build_tmp/nv
+BIN_PATH := $(USR_OUTPUT_DIR)/output/bin
+TARGET_NAME ?= Hi3861_demo

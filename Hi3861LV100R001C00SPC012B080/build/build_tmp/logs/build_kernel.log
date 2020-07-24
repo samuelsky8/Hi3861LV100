@@ -1,0 +1,212 @@
+riscv32-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -fldm-stm-optimize -freorder-blocks-algorithm=simple -fno-schedule-insns -nostdinc -fno-aggressive-loop-optimizations -fno-builtin -fno-exceptions -fno-short-enums -Wa,-enable-c-lbu-sb -mtune=size -msmall-data-limit=0 -Wall -Werror -Os -std=c99 -falign-functions=2 -fdata-sections -ffunction-sections -fno-common -DARCH_RISCV -DLOS_COMPILE_LDM -DHI_BOARD_ASIC -DCONFIG_COMPRESSION_OTA_SUPPORT -DCONFIG_FLASH_ENCRYPT_NOT_USE_EFUSE -nostdlib -nostartfiles -static -Wl,--gc-sections -L build/libs -T/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/build/scripts/flashboot_sha256.lds build/build_tmp/objs/flashboot/common/crc32/crc32.o build/build_tmp/objs/flashboot/common/nvm/hi_nvm.o build/build_tmp/objs/flashboot/common/partition_table/boot_partition_table.o build/build_tmp/objs/flashboot/drivers/efuse/efuse.o build/build_tmp/objs/flashboot/drivers/efuse/efuse_drv.o build/build_tmp/objs/flashboot/drivers/flash/flash_hw_process_flashboot.o build/build_tmp/objs/flashboot/drivers/flash/hi_flashboot_flash.o build/build_tmp/objs/flashboot/drivers/lsadc/adc_drv.o build/build_tmp/objs/flashboot/lib/lzma/LzmaDec.o build/build_tmp/objs/flashboot/lib/lzma/LzmaTools.o build/build_tmp/objs/flashboot/lzmaram/lzmaram.o build/build_tmp/objs/flashboot/secure/crypto.o build/build_tmp/objs/flashboot/startup/main.o build/build_tmp/objs/flashboot/startup/riscv_init.o build/build_tmp/objs/flashboot/upg/boot_start.o build/build_tmp/objs/flashboot/upg/boot_upg_check.o build/build_tmp/objs/flashboot/upg/boot_upg_check_secure.o build/build_tmp/objs/flashboot/upg/boot_upg_common.o build/build_tmp/objs/flashboot/upg/boot_upg_kernel.o build/build_tmp/objs/flashboot/upg/boot_upg_start_up.o build/build_tmp/objs/flashboot/upg/boot_upg_tool.o -o build/build_tmp/cache/flash_boot.elf
+tools/sign_tool/sign_tool -i build/build_tmp/cache/hi_loader_boot.bin -o output/bin/Hi3861L_loader_signed.bin -n
+[input file]:        build/build_tmp/cache/hi_loader_boot.bin
+[output file]:       output/bin/Hi3861L_loader_signed.bin
+Sign non securtiy firmware success!
+riscv32-unknown-elf-objcopy -Obinary -R .rom.text -R .rom.code.text -R .u_boot_cmd -R .rom.data -R .rom.code.data -R .rom.bss -R .rom.code.bss -S build/build_tmp/cache/flash_boot.elf build/build_tmp/cache/hi_flash_boot.bin
+cleanup(["build/build_tmp/cache/hi_flash_boot.bin"], ["build/build_tmp/cache/flash_boot.elf"])
+tools/sign_tool/sign_tool -i build/build_tmp/cache/hi_flash_boot.bin -o output/bin/Hi3861L_boot_signed.bin -n -toutput/bin/Hi3861L_boot_signed_B.bin
+[input file]:        build/build_tmp/cache/hi_flash_boot.bin
+[output file]:       output/bin/Hi3861L_boot_signed.bin
+[tail boot]:         output/bin/Hi3861L_boot_signed_B.bin
+Sign non securtiy firmware success!
+cleanup(["output/bin/Hi3861L_boot_signed.bin"], ["build/build_tmp/cache/hi_flash_boot.bin"])
+boot_ota_builder(["output/bin/Hi3861L_samuel_demo_flash_boot_ota.bin"], ["output/bin/Hi3861L_boot_signed.bin"])
+riscv32-unknown-elf-gcc -Iplatform/os/Huawei_LiteOS/kernel/include -Iconfig -DHI_BOARD_ASIC -DHI_ON_FLASH -E build/scripts/system_config.ld.S -o build/build_tmp/scripts/system_config.ld -P
+********************package boot upgrade file********************
+boot upg file  in: output/bin/Hi3861L_boot_signed.bin
+boot upg file out: output/bin/Hi3861L_samuel_demo_flash_boot_ota.bin
+[common_head_offset=0][common_head_size=96]
+[common_key_offset=96][common_key_size=288]
+[common_head_sign_offset=384][common_head_sign_size=256]
+[section_head_offset=640][section_head_size=64]
+[upg_file_sign_offset=704][upg_file_sign_size=256]
+[padding_offset=0][padding_size=0]
+[upg fill user info]chip:b'Hi3861L'
+-------------output/bin/Hi3861L_samuel_demo_flash_boot_ota.bin image info print start-------------
+[image_id=0x3c78961e][struct_version=0x0]]
+[section_offset=0x280][section_len=0x5b20]
+[file_type=0xe1][file_version=0x0][encrypt_flag=0x42]
+[file_len=0x5da0][key_len=0x120]
+[file_attr=0x44]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[aes_key[0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[aes_iv [0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[common key][00]=[0x0]
+[common key][01]=[0x0]
+[common key][30]=[0x0]
+[common key][31]=[0x0]
+[common sign][00]=[0x1e]
+[common sign][01]=[0xca]
+[common sign][30]=[0xce]
+[common sign][31]=[0xe1]
+[section sign][00]=[0x25]
+[section sign][01]=[0xcd]
+[section sign][30]=[0xa6]
+[section sign][31]=[0xd8]
+[image_id=0x3c78961e][struct_version=0x0]]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[section_count=0x1]
+[section0_compress=0x0][section0_offset=0x3c0][section0_len=0x59e0]
+[section1_compress=0x0][section1_offset=0x0][section1_len=0x0]
+-------------output/bin/Hi3861L_samuel_demo_flash_boot_ota.bin image info print end--------------
+nvimg_builder(["build/build_tmp/scripts/system_config.ld"], ["build/scripts/system_config.ld.S"])
+product_name_list: ['sta']
+xml h file: /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/h_file/nv
+/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta
+app_subver_list: ['demo']
+current subver_name:demo
+root_dir: /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool
+mdm_xml: /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/xml_file/mss_nvi_db.xml
+HNV NAME:mss_nvi_db.xml
+nv_tool: /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/tools/nv/cdbm
+app_subver_temp_dir:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/outside_demo
+make app_subver_temp_dir
+mdmxml:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/xml_file/mss_nvi_db.xml
+src_xml_list: ['/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/xml_file/mss_nvi_db.xml']
+combin_xml:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/mss_nvi_db.xml
+root_list [<Element 'HISTUDIO' at 0x7ff2be510170>]
+hi_nv_modify_by_cfg
+cfg_file: nv
+
+cmd_line= ('/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/tools/nv/cdbm', '/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/outside_demo/nv.xml', '/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/h_file/nv', '/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/outside_demo/nv')
+/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/outside_demo/nv.xml
+/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/h_file/nv
+/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/Hi3861L_samuel_demo/outside_demo/nv
+===========Init HDB Start===========
+*********strDataTypeDefPath:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/h_file/nv/../nv/nv_modem_struct_def.txt
+*********strDataTypeDefPath:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/h_file/nv/../nv/nv_factory_struct_def.txt
+===========Init HDB finish===========
+===========Write NV Buffer To File===========
+===========Write NV Buffer Finish===========
+RETURN VALUE:0
+dst_hnv= /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/hnv/Hi3861L_samuel_demo.hnv
+Factory NV total num:8
+NV_FILE_STRU :28
+Factory NV total size:632
+Normal NV total num:13
+NV_FILE_STRU :28
+Normal NV total size:766
+build hnv OK:/home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/nvtool/out_nv_bin/sta/nv/hnv/Hi3861L_samuel_demo.hnv
+ENDING
+riscv32-unknown-elf-gcc -Iplatform/os/Huawei_LiteOS/kernel/include -Iconfig -DHI_BOARD_ASIC -DHI_ON_FLASH -DFLASH_FIRM_START=4248512 -E build/scripts/link.ld.S -o build/build_tmp/scripts/link.lds -P
+riscv32-unknown-elf-ld -nostartfiles -nostdlib -static --gc-sections -Lbuild/scripts -Lbuild/libs -L/toolchain/hcc_riscv32/bin/../lib/gcc/riscv32-unknown-elf/7.3.0 -Lbuild/build_tmp/libs/platform/drivers -Lbuild/build_tmp/libs/platform/system -Lbuild/build_tmp/libs/platform/os/Huawei_LiteOS -Lbuild/build_tmp/libs/platform/os/Huawei_LiteOS/net/wpa_supplicant-2.7 -Lbuild/build_tmp/libs/third_party/mbedtls-2.16.2 -Lbuild/build_tmp/libs/components/lwip_sack -Lbuild/build_tmp/libs/components/at -Lbuild/build_tmp/libs/components/iperf2 -Lbuild/build_tmp/libs/app/samuel_demo -Lbuild/build_tmp/scripts -Lbuild/libs/no_mesh -Tbuild/build_tmp/scripts/link.lds -Map=output/bin/Hi3861L_samuel_demo.map -o output/bin/Hi3861L_samuel_demo.out --start-group -ldrv -ldiag -lc_flash -lio -lsystem -lgpio -lripple -lmmbr -lsec_flash -lHwKeystoreSDK -llitekernel_flash -lmcast6 -lHwDeviceAuthSDK -latprint -lmeshautolink -lm_flash -lgcc -lflash -luart -ladc -lcfg -lcpup -lparttab -lupg -lres_cfg -lwpa -lmbedtls -llwip -lat -liperf -lsamuel_demo -lwifi_flash -lwifi --end-group
+riscv32-unknown-elf-objcopy -O binary output/bin/Hi3861L_samuel_demo.out build/build_tmp/cache/Hi3861L_samuel_demo.bin
+riscv32-unknown-elf-objdump -d output/bin/Hi3861L_samuel_demo.out > output/bin/Hi3861L_samuel_demo.asm
+baseimg_builder(["build/build_tmp/cache/Hi3861L_samuel_demo_base.bin", "build/build_tmp/cache/Hi3861L_samuel_demo_kernel.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo.bin"])
+cleanup(["build/build_tmp/cache/Hi3861L_samuel_demo_base.bin", "build/build_tmp/cache/Hi3861L_samuel_demo_kernel.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo.bin"])
+ota_builder(["build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo_base.bin", "build/build_tmp/cache/Hi3861L_samuel_demo_kernel.bin"])
+********************package kernel&nv upgrade file********************
+upg kernel file    in: build/build_tmp/cache/Hi3861L_samuel_demo_kernel.bin
+upg normal nv file in: build/build_tmp/nv/Hi3861L_samuel_demo_normal.hnv
+upg file          out: build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin
+[common_head_offset=0][common_head_size=96]
+[common_key_offset=96][common_key_size=288]
+[common_head_sign_offset=384][common_head_sign_size=256]
+[section_head_offset=640][section_head_size=64]
+[upg_file_sign_offset=704][upg_file_sign_size=256]
+[padding_offset=611432][padding_size=8]
+[upg fill user info]chip:b'Hi3861L'
+-------------build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin image info print start-------------
+[image_id=0x3c78961e][struct_version=0x0]]
+[section_offset=0x280][section_len=0x951f0]
+[file_type=0xf0][file_version=0x0][encrypt_flag=0x42]
+[file_len=0x95470][key_len=0x120]
+[file_attr=0x44]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[aes_key[0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[aes_iv [0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[common key][00]=[0x0]
+[common key][01]=[0x0]
+[common key][30]=[0x0]
+[common key][31]=[0x0]
+[common sign][00]=[0xca]
+[common sign][01]=[0x2b]
+[common sign][30]=[0x32]
+[common sign][31]=[0x5]
+[section sign][00]=[0xc9]
+[section sign][01]=[0xf7]
+[section sign][30]=[0x7f]
+[section sign][31]=[0x4e]
+[image_id=0x3c78961e][struct_version=0x0]]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[section_count=0x2]
+[section0_compress=0x0][section0_offset=0x3c0][section0_len=0x940a8]
+[section1_compress=0x0][section1_offset=0x94468][section1_len=0x1000]
+-------------build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin image info print end--------------
+cleanup(["build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo_base.bin", "build/build_tmp/cache/Hi3861L_samuel_demo_kernel.bin"])
+burn_bin_builder(["output/bin/Hi3861L_samuel_demo_burn.bin", "output/bin/Hi3861L_samuel_demo_allinone.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin", "output/bin/Hi3861L_loader_signed.bin"])
+compress_ota_builder(["output/bin/Hi3861L_samuel_demo_ota.bin"], ["build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin"])
+********************package compress upgrade file********************
+compress upg file in:  build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin
+compress upg file out: output/bin/Hi3861L_samuel_demo_ota.bin
+lzma compress tool :********************package hiburn file******************** /home/user/Hi3861LV100/Hi3861LV100R001C00SPC012B080/tools/lzma_tool/lzma_tool
+
+hbin flash boot file in :lzma    src   file : build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin 
+output/bin/Hi3861L_boot_signed.binlzma    out   file :
+ hbin factory nv file in :build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.lzma 
+build/build_tmp/nv/Hi3861L_samuel_demo_factory.hnv
+hbin normal nv file  in : build/build_tmp/cache/Hi3861L_samuel_demo_ota_temp.bin
+hbin upg file        in : build/build_tmp/nv/Hi3861L_samuel_demo_factory.hnv
+hbin file           out : output/bin/Hi3861L_samuel_demo_burn.bin
+-------------output/bin/Hi3861L_samuel_demo_burn.bin image info print start-------------
+[bin_size]=[0xa2470]
+[image_id=0x3c78961e][struct_version=0x0]]
+[section_offset=0x280][section_len=0x951f0]
+[file_type=0xf0][file_version=0x0][encrypt_flag=0x42]
+[file_len=0x95470][key_len=0x120]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[aes_key[0,1,14,15]=[0x0][0x0][0x0][0x0]]
+[aes_iv[0,1,14,15]=[0x0][0x0][0x0][0x0]]
+-------------output/bin/Hi3861L_samuel_demo_burn.bin image info print end--------------
+['output/bin/Hi3861L_loader_signed.bin', 'output/bin/Hi3861L_samuel_demo_burn.bin', 'output/bin/Hi3861L_boot_signed_B.bin']
+[0, 0, 2072576]
+[0, 2097152, 24576]
+[12064, 664688, 24576]
+[0, 1, 1]
+4022250975
+
+LZMA 18.05 (x64) : Igor Pavlov : Public domain : 2018-04-30
+
+Input size:  611440 (0 MiB)
+                                                                Output size: 374871 (0 MiB)
+[upgbin-compressbin]0x95470-0x140000
+[common_head_offset=0][common_head_size=96]
+[common_key_offset=96][common_key_size=288]
+[common_head_sign_offset=384][common_head_sign_size=256]
+[section_head_offset=640][section_head_size=64]
+[upg_file_sign_offset=704][upg_file_sign_size=256]
+[padding_offset=375831][padding_size=9]
+[upg fill user info]chip:b'Hi3861L'
+-------------output/bin/Hi3861L_samuel_demo_ota.bin image info print start-------------
+[image_id=0x3c78961e][struct_version=0x0]]
+[section_offset=0x280][section_len=0x5b9a0]
+[file_type=0xf0][file_version=0x0][encrypt_flag=0x42]
+[file_len=0x5bc20][key_len=0x120]
+[file_attr=0x44]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[aes_key[0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[aes_iv [0-1-14-15]=[0x0][0x0][0x0][0x0]]
+[common key][00]=[0x0]
+[common key][01]=[0x0]
+[common key][30]=[0x0]
+[common key][31]=[0x0]
+[common sign][00]=[0xeb]
+[common sign][01]=[0x1a]
+[common sign][30]=[0x4a]
+[common sign][31]=[0x3d]
+[section sign][00]=[0x7c]
+[section sign][01]=[0x26]
+[section sign][30]=[0xf1]
+[section sign][31]=[0xae]
+[image_id=0x3c78961e][struct_version=0x0]]
+[hash_alg=0x0][sign_alg=0x3f][sign_param=0x0]
+[section_count=0x1]
+[section0_compress=0x1][section0_offset=0x3c0][section0_len=0x5b857]
+[section1_compress=0x0][section1_offset=0x0][section1_len=0x0]
+-------------output/bin/Hi3861L_samuel_demo_ota.bin image info print end--------------
+[95m
+< ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ >
+                              BUILD SUCCESS                              
+< ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ >
+[0m

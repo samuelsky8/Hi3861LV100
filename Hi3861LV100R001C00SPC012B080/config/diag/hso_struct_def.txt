@@ -1,0 +1,25 @@
+#define __HI_TYPES_H__
+#define HI_START_HEADER
+#define HI_END_HEADER
+#include "hso_hdb_common.h"
+#include "hi_mdm_types.h"
+#include "hi_config.h"
+#include "dfx_sal.h"
+#include "dfx_sys.h"
+#include "sal_inf.h"
+
+typedef struct
+{
+    hi_u32 buffer[2];
+    hi_u32 size;
+} DEMO_STRU;
+
+typedef struct
+{
+    hi_u16 status;
+    hi_u8 enable;
+    hi_u8 flag;
+    hi_u32 size;
+    hi_u32 cnt;
+} DEMO2_STRU;
+

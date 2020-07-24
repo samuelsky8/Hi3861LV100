@@ -1,0 +1,31 @@
+{
+    "TARGET_LIB": "samuel_demo",
+    "APP_SRCS": [
+        "init",
+        "src"
+    ],
+    "INCLUDE": [
+        "components/iperf2/include",
+        "third_party/Wi-FiTestSuite-9.2.0/inc",
+        "app/samuel_demo/include",
+        "app/samuel_demo/init",
+        "app/samuel_demo/src",
+        "config/app",
+        "config/diag",
+        "platform/os/Huawei_LiteOS/net/ripple/exports",
+        "components/ripple/exports",
+        "components/hilink/include"
+    ],
+    "CC_FLAGS": [
+    ],
+    "DEFINES": [
+        "_PRE_WLAN_FEATURE_CSI",
+        "_PRE_WLAN_FEATURE_P2P",
+        "LWIP_ENABLE_DIAG_CMD=0"
+    ],
+    "AR_FLAGS": [],
+    "LD_FLAGS": [],
+    "AS_FLAGS": [],
+    "LD_DIRS": [],
+    "CLEAN": []
+}

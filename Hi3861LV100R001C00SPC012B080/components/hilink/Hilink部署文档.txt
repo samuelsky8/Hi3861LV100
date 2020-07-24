@@ -1,0 +1,25 @@
+请按照如下路径存放Hilink sdk
+./components/hilink$ tree
+.
+├── include
+│   ├── hilink_certs.h
+│   ├── hilink_device.h
+│   ├── hilink.h
+│   ├── hilink_log.h
+│   ├── hilink_osadapter.h
+│   ├── hilink_ota.h
+│   └── hilink_typedef.h
+├── lib
+│   ├── debug
+│   │   ├── libhilinkdevicesdk.a
+│   │   └── libhilinkota.a
+│   ├── libhilinkdevicesdk.a
+│   └── libhilinkota.a
+├── hilink_device.c
+├── hilink_device_sdk.c
+├── hilink_ota.c
+└── SConscript
+
+4 directories, 16 files
+
+注：./components/hilink/lib/debug目录非必须。

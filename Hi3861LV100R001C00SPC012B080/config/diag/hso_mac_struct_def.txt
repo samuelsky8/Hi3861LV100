@@ -1,0 +1,9 @@
+#define __HI_TYPES_H__
+#define HI_START_HEADER
+#define HI_END_HEADER
+#include "hso_hdb_common.h"
+#include "hi_mdm_types.h"
+#include "hi_config.h"
+
+#include "dfx_mac.h"
+#include "sal_inf.h"
